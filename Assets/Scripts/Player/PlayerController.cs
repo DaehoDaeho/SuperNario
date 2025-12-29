@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("물리 컴포넌트")]
     public Rigidbody2D rb;
 
+    [Header("애니메이션 관련")]
+    public Animator animator;
+
     private bool isGrounded = false;    // 지면에 착지한 상태인지 여부.
 
     private float moveInput = 0.0f; // 좌우 키 입력 값을 저장하기 위한 변수.
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleJumpInput();
         UpdateDirection();
+        UpdateAnimation();
     }
 
     /// <summary>
@@ -110,5 +114,18 @@ public class PlayerController : MonoBehaviour
 
         // 크기 정보 갱신.
         transform.localScale = scale;
+    }
+
+    void UpdateAnimation()
+    {
+        if(animator == null)
+        {
+            return;
+        }
+
+        bool move = moveInput != 0.0f? true : false;
+
+        animator.SetBool("Move", move);
+        animator.SetBool("IsGrounded", isGrounded);
     }
 }
