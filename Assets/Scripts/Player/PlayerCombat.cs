@@ -15,6 +15,12 @@ public class PlayerCombat : MonoBehaviour
 
     public Animator animator;
 
+    public Transform attackPoint;
+    public float attackRange;
+    public int attackDamage = 1;
+
+    public LayerMask targetLayer;
+
     private float attackTimer;  // 공격 쿨타임 체크를 위한 타이머 변수.
     private bool isAttacking;   // 현재 공격중인지 여부.
 
@@ -74,5 +80,34 @@ public class PlayerCombat : MonoBehaviour
 
         attackTimer = attackCooldown;
         isAttacking = true;
+
+        PerformAttackHit();
+    }
+
+    void PerformAttackHit()
+    {
+        if(attackPoint == null)
+        {
+            attackPoint = transform;
+        }
+
+        Vector2 center = attackPoint.position;
+
+        Collider2D[] hit = Physics2D.OverlapCircleAll(center, attackRange, targetLayer);
+
+        for(int i=0; i<hit.Length; ++i)
+        {
+            EnemyHealth health = hit[i].GetComponent<EnemyHealth>();
+            if(health != null)
+            {
+                health.TakeDamage(attackDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
