@@ -24,4 +24,9 @@ public class GameStateManager : MonoBehaviour
     {
         return isStageClear;
     }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }
