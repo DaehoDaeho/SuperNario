@@ -16,6 +16,21 @@ public class EnemyContactDamage : MonoBehaviour
                 playerHealth.TakeDamage(damage);
                 Debug.Log("ÆÜ!!!");
             }
+
+            PlayerKnockback knockback = collision.gameObject.GetComponent<PlayerKnockback>();
+            if(knockback != null)
+            {
+                Vector2 direction = Vector2.right;
+
+                float diffX = collision.transform.position.x - transform.position.x;
+
+                if(diffX < 0.0f)
+                {
+                    direction = Vector2.left;
+                }
+
+                knockback.ApplyKnockback(direction);
+            }
         }
     }
 }

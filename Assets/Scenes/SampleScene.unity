@@ -976,6 +976,7 @@ GameObject:
   - component: {fileID: 1044969843}
   - component: {fileID: 1044969844}
   - component: {fileID: 1044969845}
+  - component: {fileID: 1044969846}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1096,6 +1097,7 @@ MonoBehaviour:
   jumpSpeed: 8
   rb: {fileID: 1044969840}
   animator: {fileID: 1044969843}
+  knockback: {fileID: 1044969846}
 --- !u!70 &1044969842
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1190,6 +1192,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   gameOverUI: {fileID: 887190092}
+--- !u!114 &1044969846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044969834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc0aa9d73a25d9409e82d546fc36adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForceX: 6
+  knockbackForceY: 1.5
+  knockbackDuration: 0.3
 --- !u!1 &1061274353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,6 +2327,7 @@ GameObject:
   - component: {fileID: 1553712779}
   - component: {fileID: 1553712780}
   - component: {fileID: 1553712781}
+  - component: {fileID: 1553712782}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2506,6 +2524,8 @@ MonoBehaviour:
   moveRight: 1
   spriteRenderer: {fileID: 1553712777}
   animator: {fileID: 1553712779}
+  rb: {fileID: 1553712775}
+  knockback: {fileID: 1553712782}
 --- !u!114 &1553712781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,6 +2539,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &1553712782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553712773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc0aa9d73a25d9409e82d546fc36adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForceX: 3
+  knockbackForceY: 1.5
+  knockbackDuration: 0.25
 --- !u!1 &1637503958
 GameObject:
   m_ObjectHideFlags: 0

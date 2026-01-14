@@ -14,6 +14,12 @@ public class EnemyPatrol : MonoBehaviour
 
     public Animator animator;
 
+    [SerializeField]
+    private Rigidbody2D rb;
+
+    [SerializeField]
+    private PlayerKnockback knockback;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +35,11 @@ public class EnemyPatrol : MonoBehaviour
 
     void Move()
     {
+        if(knockback != null && knockback.IsKnockbackActive() == true)
+        {
+            return;
+        }
+
         float directionX = 0.0f;
 
         if(moveRight == true)
@@ -51,6 +62,20 @@ public class EnemyPatrol : MonoBehaviour
         if(animator != null)
         {
             animator.SetBool("Move", true);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (knockback != null)
+        {
+            bool isKnockback = knockback.IsKnockbackActive();
+
+            if (isKnockback == true)
+            {
+                Vector2 kbVelocity = knockback.GetKnockbackVelocity();
+                rb.linearVelocity = kbVelocity;
+            }
         }
     }
 

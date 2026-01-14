@@ -102,6 +102,26 @@ public class PlayerCombat : MonoBehaviour
             {
                 health.TakeDamage(attackDamage);
             }
+
+            ApplyKnockback(hit[i]);
+        }
+    }
+
+    void ApplyKnockback(Collider2D hit)
+    {
+        PlayerKnockback knockback = hit.gameObject.GetComponent<PlayerKnockback>();
+        if (knockback != null)
+        {
+            Vector2 direction = Vector2.right;
+
+            float diffX = hit.transform.position.x - transform.position.x;
+
+            if (diffX < 0.0f)
+            {
+                direction = Vector2.left;
+            }
+
+            knockback.ApplyKnockback(direction);
         }
     }
 

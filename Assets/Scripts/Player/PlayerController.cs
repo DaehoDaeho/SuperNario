@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [Header("애니메이션 관련")]
     public Animator animator;
 
+    [SerializeField]
+    private PlayerKnockback knockback;
+
     private bool isGrounded = false;    // 지면에 착지한 상태인지 여부.
 
     private float moveInput = 0.0f; // 좌우 키 입력 값을 저장하기 위한 변수.
@@ -33,6 +36,18 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        if (knockback != null)
+        {
+            bool isKnockback = knockback.IsKnockbackActive();
+
+            if(isKnockback == true)
+            {
+                Vector2 kbVelocity = knockback.GetKnockbackVelocity();
+                rb.linearVelocity = kbVelocity;
+                return;
+            }
+        }
+
         // 실제 이동/점프 처리.
         ApplyMovement();
     }
