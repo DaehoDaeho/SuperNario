@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
             gameOverUI.SetActive(true);
         }
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void Heal(int amount)

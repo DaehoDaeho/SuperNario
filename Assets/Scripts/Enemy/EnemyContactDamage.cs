@@ -9,12 +9,23 @@ public class EnemyContactDamage : MonoBehaviour
         //if(collision.gameObject.tag == "Player")
         if(collision.gameObject.CompareTag("Player") == true)
         {
+            PlayerInvincibility inv = collision.gameObject.GetComponent<PlayerInvincibility>();
+            if(inv != null && inv.IsInvincible() == true)
+            {
+                return;
+            }
+
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
             if(playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
                 Debug.Log("ÆÜ!!!");
+            }
+
+            if(inv != null)
+            {
+                inv.StartInvincibility();
             }
 
             PlayerKnockback knockback = collision.gameObject.GetComponent<PlayerKnockback>();

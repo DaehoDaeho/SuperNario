@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -523,13 +524,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b60f317863d62984683246497e148bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1044969836}
   offset: {x: 0, y: 0, z: -10}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a64464af0af1a42b4238485e0681d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1044969836}
+  deadzoneHalfWidth: 2
+  deadzoneHalfHeight: 1
+  followSpeed: 6
+  cameraZ: -10
 --- !u!1 &589419691
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +995,7 @@ GameObject:
   - component: {fileID: 1044969844}
   - component: {fileID: 1044969845}
   - component: {fileID: 1044969846}
+  - component: {fileID: 1044969847}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1207,6 +1226,21 @@ MonoBehaviour:
   knockbackForceX: 6
   knockbackForceY: 1.5
   knockbackDuration: 0.3
+--- !u!114 &1044969847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044969834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fdced3a5bec6c49a4d071f633e81c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityDuration: 1
+  blinkInterval: 0.1
+  spriteRenderer: {fileID: 1044969835}
 --- !u!1 &1061274353
 GameObject:
   m_ObjectHideFlags: 0
