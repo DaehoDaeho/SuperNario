@@ -17,6 +17,16 @@ public class Coin : MonoBehaviour
             ScoreManager.instance.AddScore(points);
         }
 
+        if(AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(1);
+        }
+
+        if(ParticleManager.instance != null)
+        {
+            ParticleManager.instance.PlayFX(0, transform.position);
+        }
+
         Destroy(gameObject);
     }
 }

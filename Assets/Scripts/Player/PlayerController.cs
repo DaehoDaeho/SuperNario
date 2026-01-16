@@ -87,6 +87,11 @@ public class PlayerController : MonoBehaviour
             jumpRequested = false;
 
             Debug.Log("점프 실행!!!!!");
+
+            if(AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX(0);
+            }
         }
 
         rb.linearVelocity = velocity;
