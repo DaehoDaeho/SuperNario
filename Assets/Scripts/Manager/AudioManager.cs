@@ -27,7 +27,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        audioSFX.clip = clips[index];
-        audioSFX.Play();
+        //audioSFX.clip = clips[index];
+        //audioSFX.Play();
+        audioSFX.PlayOneShot(clips[index]);
     }
 }
