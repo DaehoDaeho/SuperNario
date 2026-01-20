@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AudioOptionsUI : MonoBehaviour
 {
@@ -58,6 +59,13 @@ public class AudioOptionsUI : MonoBehaviour
 
     void ApplyMixerVolume(string paramName, float value)
     {
-        mixer.SetFloat(paramName, value);
+        float safeValue = value;
+        if (safeValue <= 0.0f)
+        {
+            safeValue = 0.0001f;
+        }
+        
+        float db = Mathf.Log10(safeValue) * 20.0f;
+        mixer.SetFloat("SFXVolume", db);
     }
 }
