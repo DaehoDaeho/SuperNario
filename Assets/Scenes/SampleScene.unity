@@ -6192,6 +6192,13 @@ MonoBehaviour:
   mainSlider: {fileID: 1075889530}
   bgmSlider: {fileID: 466081564}
   sfxSlider: {fileID: 144036531}
+  mainKey: Opt_MainVolume01
+  bgmKey: Opt_BgmVolume01
+  sfxKey: Opt_SfxVolume01
+  defaultMain: 1
+  defaultBgm: 1
+  defaultSfx: 1
+  useJson: 1
 --- !u!1 &2005730523
 GameObject:
   m_ObjectHideFlags: 0
