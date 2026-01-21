@@ -6199,6 +6199,7 @@ MonoBehaviour:
   defaultBgm: 1
   defaultSfx: 1
   useJson: 1
+  saveType: 2
 --- !u!1 &2005730523
 GameObject:
   m_ObjectHideFlags: 0

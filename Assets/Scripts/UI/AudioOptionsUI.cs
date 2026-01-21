@@ -3,6 +3,13 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
+public enum SaveType
+{
+    PlayerPrefs = 0,
+    Json = 1,
+    Binary = 2
+}
+
 public class AudioOptionsUI : MonoBehaviour
 {
     [SerializeField]
@@ -48,16 +55,18 @@ public class AudioOptionsUI : MonoBehaviour
     private float defaultSfx = 1.0f;
 
     [SerializeField]
-    private bool useJson = false;
+    private SaveType saveType = SaveType.PlayerPrefs;
 
     private bool isInitializing = false;
 
     private OptionData data = null;
     private OptionsJsonStorage storage = null;
+    private OptionsBinaryStorage storageBin = null;
 
     private void Start()
     {
         storage = new OptionsJsonStorage();
+        storageBin = new OptionsBinaryStorage();
         optionPanel.SetActive(false);
         Load();
     }
@@ -74,10 +83,15 @@ public class AudioOptionsUI : MonoBehaviour
     {
         ApplyMixerVolume(mainVolumeParam, value);
 
-        if(useJson == true)
+        if(saveType == SaveType.Json)
         {
             data.mainVolume01 = value;
             storage.Save(data);
+        }
+        else if(saveType == SaveType.Binary)
+        {
+            data.mainVolume01 = value;
+            storageBin.Save(data);
         }
         else
         {
@@ -89,10 +103,15 @@ public class AudioOptionsUI : MonoBehaviour
     {
         ApplyMixerVolume(bgmVolumeParam, value);
 
-        if (useJson == true)
+        if (saveType == SaveType.Json)
         {
             data.bgmVolume01 = value;
             storage.Save(data);
+        }
+        else if (saveType == SaveType.Binary)
+        {
+            data.bgmVolume01 = value;
+            storageBin.Save(data);
         }
         else
         {
@@ -104,10 +123,15 @@ public class AudioOptionsUI : MonoBehaviour
     {
         ApplyMixerVolume(sfxVolumeParam, value);
 
-        if (useJson == true)
+        if (saveType == SaveType.Json)
         {
             data.sfxVolume01 = value;
             storage.Save(data);
+        }
+        else if (saveType == SaveType.Binary)
+        {
+            data.sfxVolume01 = value;
+            storageBin.Save(data);
         }
         else
         {
@@ -143,12 +167,29 @@ public class AudioOptionsUI : MonoBehaviour
         float bgm01 = 0.0f;
         float sfx01 = 0.0f;
 
-        if(useJson == true)
+        if(saveType == SaveType.Json)
         {
             data = storage.Load();
 
             // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
             if(data == null)
+            {
+                data = new OptionData();
+                data.mainVolume01 = defaultMain;
+                data.bgmVolume01 = defaultBgm;
+                data.sfxVolume01 = defaultSfx;
+            }
+
+            main01 = data.mainVolume01;
+            bgm01 = data.bgmVolume01;
+            sfx01 = data.sfxVolume01;
+        }
+        else if(saveType == SaveType.Binary)
+        {
+            data = storageBin.Load();
+
+            // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
+            if (data == null)
             {
                 data = new OptionData();
                 data.mainVolume01 = defaultMain;
