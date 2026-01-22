@@ -1921,6 +1921,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739306674}
   m_CullTransparentMesh: 1
+--- !u!1 &748817019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 748817020}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &748817020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748817019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1044969836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789669391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,6 +2708,7 @@ GameObject:
   - component: {fileID: 1044969845}
   - component: {fileID: 1044969846}
   - component: {fileID: 1044969847}
+  - component: {fileID: 1044969848}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2751,7 +2783,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 748817020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1044969840
@@ -2922,6 +2955,22 @@ MonoBehaviour:
   invincibilityDuration: 1
   blinkInterval: 0.1
   spriteRenderer: {fileID: 1044969835}
+--- !u!114 &1044969848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044969834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9058ad655b27654a9ba05a6327bba8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8559316531149831160, guid: 693b305803c3411448f77376d8abfb10, type: 3}
+  firePoint: {fileID: 748817020}
+  fireCooldown: 0.25
+  fireKey: 102
 --- !u!1 &1061274353
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,7 +4342,7 @@ GameObject:
   - component: {fileID: 1553712782}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6198,7 +6247,6 @@ MonoBehaviour:
   defaultMain: 1
   defaultBgm: 1
   defaultSfx: 1
-  useJson: 1
   saveType: 2
 --- !u!1 &2005730523
 GameObject:
