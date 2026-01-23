@@ -14,6 +14,21 @@ public class Projectile : MonoBehaviour
     private float lifeTimer = 0.0f;
     private Vector2 direction = Vector2.right;
 
+    private ProjectilePool pool = null;
+
+    /// <summary>
+    /// 재활용을 위해 활성화 시 타이머 초기화.
+    /// </summary>
+    private void OnEnable()
+    {
+        lifeTimer = 0.0f;
+    }
+
+    public void SetPool(ProjectilePool projectilePool)
+    {
+        pool = projectilePool;
+    }
+
     public void SetDirection(Vector2 dir)
     {
         // 순수한 방향정보만 가지고 있는 벡터는 크기가 1이어야 한다.
@@ -46,13 +61,14 @@ public class Projectile : MonoBehaviour
         lifeTimer += Time.deltaTime;
         if(lifeTimer >= lifeTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            ReturnToPool();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") == false)
+        if(collision.gameObject.CompareTag("Player") == true)
         {
             return;
         }
@@ -63,7 +79,8 @@ public class Projectile : MonoBehaviour
             enemyHealth.TakeDamage(damage);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        ReturnToPool();
     }
 
     // Update is called once per frame
@@ -71,5 +88,19 @@ public class Projectile : MonoBehaviour
     {
         Move();
         UpdateLifetime();
+    }
+
+    /// <summary>
+    /// 사용이 끝난 총알을 반환.
+    /// </summary>
+    void ReturnToPool()
+    {
+        if(pool != null)
+        {
+            pool.Return(this);
+            return;
+        }
+
+        Destroy(gameObject);
     }
 }

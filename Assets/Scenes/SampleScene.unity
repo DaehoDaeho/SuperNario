@@ -2971,6 +2971,7 @@ MonoBehaviour:
   firePoint: {fileID: 748817020}
   fireCooldown: 0.25
   fireKey: 102
+  projectilePool: {fileID: 1560239941}
 --- !u!1 &1061274353
 GameObject:
   m_ObjectHideFlags: 0
@@ -4566,6 +4567,54 @@ MonoBehaviour:
   knockbackForceX: 3
   knockbackForceY: 1.5
   knockbackDuration: 0.25
+--- !u!1 &1560239940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560239942}
+  - component: {fileID: 1560239941}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1560239941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560239940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c34051a402bda42a049133f03f6fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8559316531149831160, guid: 693b305803c3411448f77376d8abfb10, type: 3}
+  initialSize: 30
+  canExpand: 1
+  expandCount: 10
+--- !u!4 &1560239942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560239940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1561103033
 GameObject:
   m_ObjectHideFlags: 0
@@ -6583,3 +6632,4 @@ SceneRoots:
   - {fileID: 375856053}
   - {fileID: 2103770474}
   - {fileID: 1075746514}
+  - {fileID: 1560239942}
