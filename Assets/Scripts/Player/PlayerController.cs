@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
             if(AudioManager.instance != null)
             {
-                AudioManager.instance.PlaySFX(0);
+                AudioManager.instance.PlaySFX(AudioType.Jump);
             }
         }
 
