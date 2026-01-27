@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum ParticleType
 {
-    GainCoin = 0;
+    GainCoin = 0
 }
 
 
