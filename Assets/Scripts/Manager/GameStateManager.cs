@@ -13,6 +13,11 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if(SceneTransition.instance != null)
+        {
+            SceneTransition.instance.FadeIn();
+        }
     }
 
     public void SetStageClear()
