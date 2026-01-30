@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleScene : MonoBehaviour
 {
@@ -6,7 +7,14 @@ public class TitleScene : MonoBehaviour
     {
         if(SceneTransition.instance != null)
         {
-            SceneTransition.instance.LoadNextScene("SampleScene");
+            // 이벤트 함수 등록.
+            SceneTransition.instance.FadeOutEvent += LoadToLoadingScene;
+            SceneTransition.instance.StartFadeOut();
         }
+    }
+
+    void LoadToLoadingScene()
+    {
+        SceneManager.LoadScene("LoadingScene");
     }
 }

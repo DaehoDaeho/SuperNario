@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class SceneTransition : MonoBehaviour
 
     public static SceneTransition instance;
 
+    public event Action FadeOutEvent = null;
+    public event Action FadeInEvent = null;
+    
     private void Awake()
     {
         instance = this;
@@ -18,12 +22,12 @@ public class SceneTransition : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadNextScene(string nextSceneName)
+    public void StartFadeOut()
     {
-        StartCoroutine(FadeOut(nextSceneName));
+        StartCoroutine(FadeOut());
     }
 
-    IEnumerator FadeOut(string nextSceneName)
+    IEnumerator FadeOut()
     {
         fadeImage.gameObject.SetActive(true);
 
@@ -43,7 +47,14 @@ public class SceneTransition : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(nextSceneName);
+        //SceneManager.LoadScene(nextSceneName);
+
+        // 등록된 이벤트 함수가 있을 경우 호출.
+        if(FadeOutEvent != null)
+        {
+            FadeOutEvent.Invoke();
+            FadeOutEvent = null;
+        }
     }
 
     public void FadeIn()
@@ -70,6 +81,12 @@ public class SceneTransition : MonoBehaviour
 
             fadeImage.color = color;
             yield return null;
+        }
+
+        if(FadeInEvent != null)
+        {
+            FadeInEvent.Invoke();
+            FadeInEvent = null;
         }
     }
 }
