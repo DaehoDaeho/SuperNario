@@ -13,6 +13,24 @@ public class TitleScene : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        if (SceneTransition.instance != null)
+        {
+            // 이벤트 함수 등록 해제.
+            SceneTransition.instance.FadeOutEvent -= LoadToLoadingScene;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (SceneTransition.instance != null)
+        {
+            // 이벤트 함수 등록 해제.
+            SceneTransition.instance.FadeOutEvent -= LoadToLoadingScene;
+        }
+    }
+
     void LoadToLoadingScene()
     {
         SceneManager.LoadScene("LoadingScene");

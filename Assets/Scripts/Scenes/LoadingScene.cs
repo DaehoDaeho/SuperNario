@@ -27,6 +27,26 @@ public class LoadingScene : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        if (SceneTransition.instance != null)
+        {
+            // 이벤트 함수 등록 해제.
+            SceneTransition.instance.FadeInEvent -= StartLoadGameScene;
+            SceneTransition.instance.FadeOutEvent -= LoadToGameScene;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (SceneTransition.instance != null)
+        {
+            // 이벤트 함수 등록 해제.
+            SceneTransition.instance.FadeInEvent -= StartLoadGameScene;
+            SceneTransition.instance.FadeOutEvent -= LoadToGameScene;
+        }
+    }
+
     void StartLoadGameScene()
     {
         // 코루틴 함수를 호출해서 비동기로 다음 씬을 로딩하고, 로딩 진행률을 UI에 표시한다.
