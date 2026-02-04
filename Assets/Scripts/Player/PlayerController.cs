@@ -15,6 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerKnockback knockback;
 
+    [SerializeField]
+    private Transform groundCheck;
+
+    [SerializeField]
+    private float rayLength = 0.25f;
+
+    [SerializeField]
+    private LayerMask groundLayer;
+
     private bool isGrounded = false;    // 지면에 착지한 상태인지 여부.
 
     private float moveInput = 0.0f; // 좌우 키 입력 값을 저장하기 위한 변수.
@@ -23,6 +32,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = IsGrounded();
+
         // 키 입력 처리.
         HandleMoveInput();
         HandleJumpInput();
@@ -97,25 +108,25 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // 충돌한 오브젝트가 지면이 맞는지 먼저 체크를 해야 한다.
-        // 충돌한 게임 오브젝트의 태그(Tag) 정보를 비교해서 체크.
-        if(collision.gameObject.CompareTag("Ground") == true)
-        {
-            isGrounded = true;
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    // 충돌한 오브젝트가 지면이 맞는지 먼저 체크를 해야 한다.
+    //    // 충돌한 게임 오브젝트의 태그(Tag) 정보를 비교해서 체크.
+    //    if(collision.gameObject.CompareTag("Ground") == true)
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // 충돌한 오브젝트가 지면이 맞는지 먼저 체크를 해야 한다.
-        // 충돌한 게임 오브젝트의 태그(Tag) 정보를 비교해서 체크.
-        if (collision.gameObject.CompareTag("Ground") == true)
-        {
-            isGrounded = false;
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    // 충돌한 오브젝트가 지면이 맞는지 먼저 체크를 해야 한다.
+    //    // 충돌한 게임 오브젝트의 태그(Tag) 정보를 비교해서 체크.
+    //    if (collision.gameObject.CompareTag("Ground") == true)
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
 
     void UpdateDirection()
     {
@@ -147,5 +158,19 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("Move", move);
         animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    bool IsGrounded()
+    {
+        // 광선을 쏠 위치. 광선을 쏠 방향. 광선의 길이. 광선에 명중되었는지 체크할 대상에 포함시킬 오브젝트의 유형.
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(groundCheck.position.x, groundCheck.position.y), Vector2.down,
+            rayLength, groundLayer);
+
+        if(hit.collider != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
